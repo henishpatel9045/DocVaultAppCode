@@ -1,12 +1,9 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 
-import EmptyScreen from "./app/screens/EmptyScreen";
-import Screen from "./app/screens/Screen";
 import { dark } from "./app/configs/themes";
-import NotesScreen from "./app/screens/NotesScreen";
-import DocScreen from "./app/screens/DocScreen";
-import ImageScreen from "./app/screens/ImageScreen";
+import DocSelectScreen from "./app/screens/DocSelectScreen";
+import HomeScreen from "./app/screens/HomeScreen";
 
 export default function App() {
   const urlis = [
@@ -19,7 +16,7 @@ export default function App() {
   ];
   return (
     <View style={styles.container}>
-      <ImageScreen image={urlis} label={"PanCard"} />
+      <DocSelectScreen />
     </View>
   );
 }

@@ -5,10 +5,12 @@ import {
   Text,
   TouchableHighlight,
   FlatList,
+  Dimensions,
 } from "react-native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import NotesHeader from "../components/NotesHeader";
-import { cardColors } from "../configs/themes";
+import { cardColors, dark } from "../configs/themes";
 import Screen from "./Screen";
 
 const notes = [
@@ -23,16 +25,36 @@ const notes = [
   { id: 9, note: "Animes produced by Ufotable" },
 ];
 
-export default function NotesScreen() {
-  const Card = ({ txt, color }) => (
+export default function HomeScreen() {
+  const Card = ({ txt, type, id, color }) => (
     <TouchableHighlight
       onPress={() => console.log()}
       style={[styles.card, { backgroundColor: color }]}
       underlayColor={"rgba(255,255,255,0.8)"}
     >
-      <Text style={styles.cardTxt}>{txt}</Text>
+      <>
+        <MaterialCommunityIcons
+          name="card-account-details"
+          size={65}
+          color={dark.primary}
+          style={styles.cardIcon}
+        />
+        <View style={styles.description}>
+          <Text style={styles.title}>{type}</Text>
+          <Text style={styles.name}>{id.name}</Text>
+        </View>
+        <TouchableHighlight
+          style={styles.iconBtn}
+          onPress={handleShare}
+          underlayColor={"rgba(255,255,255,0.8)"}
+        >
+          <MaterialCommunityIcons name="share" size={40} color={dark.primary} />
+        </TouchableHighlight>
+      </>
     </TouchableHighlight>
   );
+
+  const handleShare = () => console.log();
 
   return (
     <Screen>
@@ -44,7 +66,12 @@ export default function NotesScreen() {
           data={notes}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item, index }) => (
-            <Card txt={item.note} color={cardColors[index % 6]} />
+            <Card
+              txt={item.note}
+              color={cardColors[index % 6]}
+              type={"Driving Licence"}
+              id={{ name: "Henish Patel" }}
+            />
           )}
           ItemSeparatorComponent={() => <View style={{ height: 20 }} />}
         />
@@ -59,11 +86,27 @@ const styles = StyleSheet.create({
   },
   card: {
     borderRadius: 10,
-    padding: 15,
-    paddingHorizontal: 28,
+    alignItems: "center",
+    flexDirection: "row",
+    paddingLeft: 15,
     width: "100%",
+    overflow: "hidden",
+    height: Dimensions.get("window").height * 0.15,
   },
-  cardTxt: {
+  description: {
+    flex: 1,
+    marginHorizontal: 5,
+  },
+  title: {
     fontSize: 20,
+    fontWeight: "bold",
+  },
+  name: {
+    fontSize: 18,
+  },
+  iconBtn: {
+    padding: 15,
+    height: "100%",
+    justifyContent: "center",
   },
 });

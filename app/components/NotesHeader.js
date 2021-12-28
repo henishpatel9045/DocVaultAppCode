@@ -7,13 +7,13 @@ export default function NotesHeader({ children }) {
     <View style={{ flex: 1 }}>
       <View style={styles.header}>
         <Text style={styles.headerTxt}>Docs</Text>
-        <TouchableHighlight
+        {/* <TouchableHighlight
           style={styles.icon}
           onPress={() => console.log()}
           underlayColor={"rgba(255, 255, 255, 0.3)"}
         >
           <MaterialCommunityIcons name="magnify" color={"white"} size={25} />
-        </TouchableHighlight>
+        </TouchableHighlight> */}
         <TouchableHighlight
           style={styles.icon}
           onPress={() => console.log()}
