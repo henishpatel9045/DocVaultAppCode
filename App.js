@@ -6,11 +6,20 @@ import Screen from "./app/screens/Screen";
 import { dark } from "./app/configs/themes";
 import NotesScreen from "./app/screens/NotesScreen";
 import DocScreen from "./app/screens/DocScreen";
+import ImageScreen from "./app/screens/ImageScreen";
 
 export default function App() {
+  const urlis = [
+    {
+      url: "",
+      props: {
+        source: require("./app/assets/doc1.jpg"),
+      },
+    },
+  ];
   return (
     <View style={styles.container}>
-      <DocScreen />
+      <ImageScreen image={urlis} label={"PanCard"} />
     </View>
   );
 }
