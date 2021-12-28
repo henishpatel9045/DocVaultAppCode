@@ -4,6 +4,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { dark } from "./app/configs/themes";
 import DocSelectScreen from "./app/screens/DocSelectScreen";
 import HomeScreen from "./app/screens/HomeScreen";
+import PinScreen from "./app/screens/PinScreen";
 
 export default function App() {
   const urlis = [
@@ -16,7 +17,7 @@ export default function App() {
   ];
   return (
     <View style={styles.container}>
-      <DocSelectScreen />
+      <PinScreen />
     </View>
   );
 }
