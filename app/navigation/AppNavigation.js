@@ -4,6 +4,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { dark } from "../configs/themes";
 import DocEditScreen from "../screens/DocEditScreen";
 import HomeScreen from "../screens/HomeScreen";
+import DocEditSelectCompo from "./DocEditSelectCompo";
 
 export default function AppNavigation() {
   const Stack = createStackNavigator();
@@ -26,7 +27,7 @@ export default function AppNavigation() {
       />
       <Stack.Screen
         name="CreateScreen"
-        component={DocEditScreen}
+        component={DocEditSelectCompo}
         options={({ route }) => ({ title: route.params.title })}
       />
     </Stack.Navigator>

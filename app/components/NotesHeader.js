@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginTop: 15,
     marginHorizontal: 15,
+    zIndex: 3,
   },
   headerTxt: {
     color: "white",

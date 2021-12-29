@@ -10,8 +10,9 @@ import FormContext from "../storage/formContext";
 import AppForm from "../components/AppForm";
 import ImageShowComponent from "../components/ImageShowComponent";
 import { dark } from "../configs/themes";
+import ResultEditScreen from "./ResultEditScreen";
 
-export default function DocEditScreen({ children, route }) {
+export default function DocEditScreen({ children, type = "certificate" }) {
   const initialValues = {
     type: "",
     name: "",
@@ -32,8 +33,6 @@ export default function DocEditScreen({ children, route }) {
       saveMethods.saveObj("userData", { docs: [values] });
     });
   };
-
-  const type = route.params.type;
 
   return (
     <AppForm
