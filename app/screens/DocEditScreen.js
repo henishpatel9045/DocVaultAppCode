@@ -8,10 +8,9 @@ import KeyboardAvoidingWrapper from "../components/KeyboardAvoidingWrapper";
 import * as saveMethods from "../storage/saveToStorage";
 import FormContext from "../storage/formContext";
 import AppForm from "../components/AppForm";
+import ImageShowComponent from "../components/ImageShowComponent";
 
-export default function DocEditScreen({ children }) {
-  const [formData, setformData] = useState({});
-
+export default function DocEditScreen({ children, type }) {
   const initialValues = {
     type: "",
     name: "",
@@ -20,6 +19,7 @@ export default function DocEditScreen({ children }) {
     expiryDate: "",
     frontImage: "",
     backImage: "",
+    ifsc: "",
     percentage: "",
     percentile: "",
     year: "",
@@ -27,14 +27,10 @@ export default function DocEditScreen({ children }) {
   };
 
   const handleSubmit = (values) => {
-    console.log(values);
+    saveMethods.getObj("userData").then((res) => {
+      saveMethods.saveObj("userData", { docs: [values] });
+    });
   };
-
-  const handleRemove = (setFunc) =>
-    Alert.alert("Remove Image", "Are you sure?", [
-      { text: "Cancle" },
-      { text: "Ok", onPress: () => setFunc("") },
-    ]);
 
   return (
     <Screen>
@@ -43,6 +39,7 @@ export default function DocEditScreen({ children }) {
         onSubmit={(values) => handleSubmit(values)}
         style={{ flex: 1 }}
       >
+        <AppInput hidden label={"result"} name={type} />
         <KeyboardAvoidingWrapper style={styles.container}>
           <View style={styles.bottomBtn}>
             <IconButton
@@ -77,7 +74,10 @@ export default function DocEditScreen({ children }) {
             />
           </View>
           {children}
-          <View style={styles.images}></View>
+          <View style={styles.images}>
+            <ImageShowComponent name={"frontImage"} />
+            <ImageShowComponent name={"backImage"} />
+          </View>
         </KeyboardAvoidingWrapper>
         <View style={styles.footer}>
           <AppButton

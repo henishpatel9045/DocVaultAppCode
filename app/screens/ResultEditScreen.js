@@ -7,13 +7,12 @@ import DocEditScreen from "./DocEditScreen";
 
 export default function ResultEditScreen() {
   return (
-    <DocEditScreen>
+    <DocEditScreen type={"result"}>
       <View style={{ flexDirection: "row", justifyContent: "space-evenly" }}>
         <AppInput label={"RollNo."} style={{ width: "50%" }} name={"rollNo"} />
         <AppInput label={"Year"} style={{ width: "50%" }} name={"year"} />
       </View>
       <View style={{ flexDirection: "row", justifyContent: "space-evenly" }}>
-        <AppInput hidden label={"result"} name={"type"} />
         <AppInput
           label={"Percentage"}
           style={{ width: "50%" }}

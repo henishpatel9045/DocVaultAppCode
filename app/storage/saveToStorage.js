@@ -26,4 +26,4 @@ const deleteObj = (key) => {
   }
 };
 
-export default { saveObj, getObj, deleteObj };
+export { saveObj, getObj, deleteObj };

@@ -1,7 +1,12 @@
+import { useFormikContext } from "formik";
 import React from "react";
-import { StyleSheet, Image, TouchableOpacity } from "react-native";
+import { StyleSheet, Image, TouchableOpacity, Alert } from "react-native";
 
-export default function iImageShowComponent() {
+export default function ImageShowComponent({ name }) {
+  const { values, setFieldValue } = useFormikContext();
+  if (values[name] == "") {
+    return null;
+  }
   return (
     <TouchableOpacity
       onPress={() =>
@@ -9,7 +14,7 @@ export default function iImageShowComponent() {
           { text: "Cancle" },
           {
             text: "Ok",
-            onPress: () => console.log(),
+            onPress: () => setFieldValue(name, ""),
           },
         ])
       }
@@ -18,13 +23,12 @@ export default function iImageShowComponent() {
       <Image
         style={{ borderRadius: 5 }}
         source={{
-          uri: formData?.backImage,
+          uri: values[name],
           width: "100%",
           height: 200,
         }}
         resizeMode="contain"
       />
-      )
     </TouchableOpacity>
   );
 }
