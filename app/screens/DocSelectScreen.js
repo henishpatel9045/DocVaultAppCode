@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import {
   StyleSheet,
@@ -8,22 +9,25 @@ import {
   Dimensions,
 } from "react-native";
 import { docImageData } from "../configs/staticData";
-import { cardColors } from "../configs/themes";
+import { cardColors, dark } from "../configs/themes";
 import Screen from "./Screen";
 
 const data = docImageData;
 
 export default function DocSelectScreen() {
-  const Card = ({ type, color, image }) => (
+  const navigation = useNavigation();
+  const Card = ({ type, title, color, image }) => (
     <TouchableHighlight
-      onPress={() => console.log()}
+      onPress={() =>
+        navigation.navigate("CreateScreen", { type: type, title: title })
+      }
       style={[styles.card, { backgroundColor: color }]}
       underlayColor={"rgba(255,255,255,0.8)"}
     >
       <>
         <Image source={image} style={styles.cardIcon} />
         <View style={styles.description}>
-          <Text style={styles.title}>{type}</Text>
+          <Text style={styles.title}>{title}</Text>
         </View>
       </>
     </TouchableHighlight>
@@ -33,7 +37,8 @@ export default function DocSelectScreen() {
   Object.keys(data).forEach((item, index) =>
     renderItem.push(
       <Card
-        type={data[item].title}
+        title={data[item].title}
+        type={item}
         key={index}
         image={data[item].image}
         color={cardColors[index % 6]}
@@ -41,16 +46,13 @@ export default function DocSelectScreen() {
     )
   );
 
-  return (
-    <Screen>
-      <View style={styles.container}>{renderItem}</View>
-    </Screen>
-  );
+  return <View style={styles.container}>{renderItem}</View>;
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: dark.primary,
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",

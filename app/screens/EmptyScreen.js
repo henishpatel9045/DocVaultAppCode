@@ -1,29 +1,18 @@
 import React from "react";
-import {
-  Dimensions,
-  Image,
-  StyleSheet,
-  Text,
-  TouchableHighlight,
-  View,
-} from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
 import NotesHeader from "../components/NotesHeader";
-import Screen from "./Screen";
 
 export default function EmptyScreen() {
   return (
-    <Screen>
-      <NotesHeader>
-        <View style={styles.imgCompo}>
-          <Image
-            source={require("../assets/emptyScreen.png")}
-            style={styles.img}
-          />
-          <Text style={styles.imgTxt}>Add your first document!!!</Text>
-        </View>
-      </NotesHeader>
-    </Screen>
+    <NotesHeader>
+      <View style={styles.imgCompo}>
+        <Image
+          source={require("../assets/emptyScreen.png")}
+          style={styles.img}
+        />
+        <Text style={styles.imgTxt}>Add your first document!!!</Text>
+      </View>
+    </NotesHeader>
   );
 }
 

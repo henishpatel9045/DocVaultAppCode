@@ -1,8 +1,19 @@
-import React from "react";
-import { StyleSheet, TouchableHighlight, Text, View } from "react-native";
+import React, { useState } from "react";
+import {
+  StyleSheet,
+  TouchableHighlight,
+  Text,
+  Modal,
+  View,
+} from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import DocSelectScreen from "../screens/DocSelectScreen";
+import { dark } from "../configs/themes";
+import { NavigationContainer } from "@react-navigation/native";
+import AppNavigation from "../navigation/AppNavigation";
 
 export default function NotesHeader({ children }) {
+  const [visible, setvisible] = useState(false);
   return (
     <View style={{ flex: 1 }}>
       <View style={styles.header}>
@@ -26,9 +37,18 @@ export default function NotesHeader({ children }) {
           />
         </TouchableHighlight>
       </View>
+      <Modal
+        visible={visible}
+        animationType="slide"
+        transparent={false}
+        onRequestClose={() => setvisible(!visible)}
+        style={{ backgroundColor: dark.primary }}
+      >
+        <DocSelectScreen />
+      </Modal>
       <TouchableHighlight
         style={styles.addIcon}
-        onPress={() => console.log()}
+        onPress={() => setvisible(!visible)}
         underlayColor={"rgba(255, 255, 255, 0.8)"}
       >
         <MaterialCommunityIcons name="plus" color={"white"} size={50} />

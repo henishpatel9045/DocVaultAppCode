@@ -9,8 +9,9 @@ import * as saveMethods from "../storage/saveToStorage";
 import FormContext from "../storage/formContext";
 import AppForm from "../components/AppForm";
 import ImageShowComponent from "../components/ImageShowComponent";
+import { dark } from "../configs/themes";
 
-export default function DocEditScreen({ children, type }) {
+export default function DocEditScreen({ children, route }) {
   const initialValues = {
     type: "",
     name: "",
@@ -32,72 +33,70 @@ export default function DocEditScreen({ children, type }) {
     });
   };
 
+  const type = route.params.type;
+
   return (
-    <Screen>
-      <AppForm
-        values={initialValues}
-        onSubmit={(values) => handleSubmit(values)}
-        style={{ flex: 1 }}
-      >
-        <AppInput hidden label={"result"} name={type} />
-        <KeyboardAvoidingWrapper style={styles.container}>
-          <View style={styles.bottomBtn}>
-            <IconButton
-              iconName={"smart-card"}
-              label={"Front"}
-              size={100}
-              name="frontImage"
-            />
-            <IconButton
-              iconName={"card-bulleted"}
-              label={"Back "}
-              size={100}
-              name="backImage"
-            />
-          </View>
-          <AppInput label={"Name"} name="name" />
-          <AppInput label={"DocNo"} name="docNo" />
-          <View
-            style={{ flexDirection: "row", justifyContent: "space-evenly" }}
-          >
-            <AppInput
-              placeholder={"dd-mm-yyyy"}
-              label={"Issue Date"}
-              name="issueDate"
-              style={{ width: "50%" }}
-            />
-            <AppInput
-              placeholder={"dd-mm-yyyy"}
-              name="expiryDate"
-              label={"Expiry Date"}
-              style={{ width: "50%" }}
-            />
-          </View>
-          {children}
-          <View style={styles.images}>
-            <ImageShowComponent name={"frontImage"} />
-            <ImageShowComponent name={"backImage"} />
-          </View>
-        </KeyboardAvoidingWrapper>
-        <View style={styles.footer}>
-          <AppButton
-            label={"Delete"}
-            bgColor={"tomato"}
-            onPress={() => console.log()}
-            width={"50%"}
-            radius={0}
+    <AppForm
+      values={initialValues}
+      onSubmit={(values) => handleSubmit(values)}
+      style={{ flex: 1, backgroundColor: dark.primary }}
+    >
+      <AppInput hidden label={type} name={"type"} />
+      <KeyboardAvoidingWrapper style={styles.container}>
+        <View style={styles.bottomBtn}>
+          <IconButton
+            iconName={"smart-card"}
+            label={"Front"}
+            size={100}
+            name="frontImage"
           />
-          <AppButton
-            label={"Save"}
-            bgColor={"#5f90f0"}
-            submit={true}
-            onPress={handleSubmit}
-            width={"50%"}
-            radius={0}
+          <IconButton
+            iconName={"card-bulleted"}
+            label={"Back "}
+            size={100}
+            name="backImage"
           />
         </View>
-      </AppForm>
-    </Screen>
+        <AppInput label={"Name"} name="name" />
+        <AppInput label={"DocNo"} name="docNo" />
+        <View style={{ flexDirection: "row", justifyContent: "space-evenly" }}>
+          <AppInput
+            placeholder={"dd-mm-yyyy"}
+            label={"Issue Date"}
+            name="issueDate"
+            style={{ width: "50%" }}
+          />
+          <AppInput
+            placeholder={"dd-mm-yyyy"}
+            name="expiryDate"
+            label={"Expiry Date"}
+            style={{ width: "50%" }}
+          />
+        </View>
+        {children}
+        <View style={styles.images}>
+          <ImageShowComponent name={"frontImage"} />
+          <ImageShowComponent name={"backImage"} />
+        </View>
+      </KeyboardAvoidingWrapper>
+      <View style={styles.footer}>
+        <AppButton
+          label={"Delete"}
+          bgColor={"tomato"}
+          onPress={() => console.log()}
+          width={"50%"}
+          radius={0}
+        />
+        <AppButton
+          label={"Save"}
+          bgColor={"#5f90f0"}
+          submit={true}
+          onPress={handleSubmit}
+          width={"50%"}
+          radius={0}
+        />
+      </View>
+    </AppForm>
   );
 }
 
