@@ -2,11 +2,27 @@ import React from "react";
 import { StyleSheet, Text, TouchableHighlight, View } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { dark } from "../configs/themes";
+import * as ImagePicker from "expo-image-picker";
+import { useFormikContext } from "formik";
 
-export default function IconButton({ name, label, style, size, onPress }) {
+export default function IconButton({ iconName, label, style, size, name }) {
+  const { setFieldValue } = useFormikContext();
+  const imagePicker = async (setFunc) => {
+    try {
+      const getImage = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        quality: 1,
+      });
+
+      if (!getImage.cancelled) {
+        setFunc(getImage.uri);
+      }
+    } catch (error) {}
+  };
   return (
     <TouchableHighlight
-      onPress={onPress}
+      onPress={() => imagePicker((value) => setFieldValue(name, value))}
       underlayColor={"#ededed"}
       style={[
         styles.container,
@@ -22,7 +38,7 @@ export default function IconButton({ name, label, style, size, onPress }) {
     >
       <>
         <MaterialCommunityIcons
-          name={name}
+          name={iconName}
           size={size ? size - 25 : 30}
           color={dark.primary}
           style={styles.icon}

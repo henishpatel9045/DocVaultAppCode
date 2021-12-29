@@ -1,3 +1,4 @@
+import { useFormikContext } from "formik";
 import React from "react";
 import { StyleSheet, Text, View, TouchableHighlight } from "react-native";
 import { dark } from "../configs/themes";
@@ -8,9 +9,14 @@ export default function AppButton({
   bgColor,
   style,
   color,
+  submit,
   width,
   radius,
 }) {
+  if (submit) {
+    const { handleSubmit, handleReset } = useFormikContext();
+    onPress = handleSubmit;
+  }
   return (
     <TouchableHighlight
       onPress={onPress}

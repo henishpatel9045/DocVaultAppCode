@@ -1,12 +1,48 @@
-import React from "react";
-import { StyleSheet, Text, View, TextInput, ToastAndroid } from "react-native";
+import { useFormikContext } from "formik";
+import React, { useEffect } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  TouchableHighlight,
+} from "react-native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-export default function AppInput({ label, style }) {
+export default function AppInput({
+  label,
+  style,
+  placeholder,
+  hidden,
+  width,
+  name,
+  ...otherProps
+}) {
+  const { setFieldValue, values } = useFormikContext();
+  if (hidden) {
+    useEffect(() => setFieldValue(name, label), []);
+    return null;
+  }
   return (
     <View style={style}>
       <Text style={styles.label}>{label}</Text>
-      <View style={styles.detail}>
-        <TextInput style={styles.docNo} placeholder={label} />
+      <View style={[styles.detail, { width: width }]}>
+        <TextInput
+          value={values[name]}
+          onChangeText={(txt) => setFieldValue(name, txt)}
+          {...otherProps}
+          style={styles.docNo}
+          placeholder={placeholder ? placeholder : label}
+        />
+        {values[name] != "" && (
+          <TouchableHighlight
+            style={{ padding: 5, borderRadius: 5 }}
+            onPress={() => setFieldValue(name, "")}
+            underlayColor={"rgba(10, 10, 10, .2)"}
+          >
+            <MaterialCommunityIcons name="close" color={"#808080"} size={15} />
+          </TouchableHighlight>
+        )}
       </View>
     </View>
   );

@@ -6,41 +6,67 @@ import {
   TouchableHighlight,
   FlatList,
   Dimensions,
+  Image,
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import NotesHeader from "../components/NotesHeader";
 import { cardColors, dark } from "../configs/themes";
 import Screen from "./Screen";
+import { docImageData } from "../configs/staticData";
 
 const notes = [
-  { id: 1, note: "Book Review : The Design of Everyday Things by Don Norman" },
-  { id: 2, note: "UI concepts worth exsisting" },
-  { id: 3, note: "List of free & open source apps" },
-  { id: 4, note: "Awesome tweets collection" },
-  { id: 5, note: "Awesome tweets collection" },
-  { id: 6, note: "Awesome tweets collection" },
-  { id: 7, note: "Awesome tweets collection" },
-  { id: 8, note: "Mangas planned to read" },
-  { id: 9, note: "Animes produced by Ufotable" },
+  {
+    id: 1,
+    type: "aadhar",
+    name: "Patel Henish Amrutbhai",
+    DocNo: "912968743632",
+  },
+  { id: 2, type: "pan", name: "Patel Amrutbhai Kanubhai", DocNo: "BIPPP6569K" },
+  {
+    id: 3,
+    type: "dl",
+    name: "Patel Henish Amrutbhai",
+    DocNo: "GJ02 2021 0021991",
+  },
+  {
+    id: 4,
+    type: "voterId",
+    name: "Patel Henish Amrutbhai",
+    DocNo: "USQ2723971",
+  },
+  { id: 5, type: "result", name: "Patel Henish Amrutbhai", DocNo: "08501" },
+  {
+    id: 6,
+    type: "passport",
+    name: "Patel Henish Amrutbhai",
+    DocNo: "U4489717",
+  },
+  {
+    id: 7,
+    type: "debit",
+    name: "Patel Henish Amrutbhai",
+    DocNo: "2502 4545 6897",
+  },
+  {
+    id: 8,
+    type: "passbook",
+    name: "Patel Henish Amrutbhai",
+    DocNo: "01490100024789",
+  },
 ];
 
 export default function HomeScreen() {
-  const Card = ({ txt, type, id, color }) => (
+  const Card = ({ type, id, color }) => (
     <TouchableHighlight
       onPress={() => console.log()}
       style={[styles.card, { backgroundColor: color }]}
       underlayColor={"rgba(255,255,255,0.8)"}
     >
       <>
-        <MaterialCommunityIcons
-          name="card-account-details"
-          size={65}
-          color={dark.primary}
-          style={styles.cardIcon}
-        />
+        <Image source={docImageData[id.type].image} style={styles.cardIcon} />
         <View style={styles.description}>
-          <Text style={styles.title}>{type}</Text>
+          <Text style={styles.title}>{docImageData[id.type].title}</Text>
           <Text style={styles.name}>{id.name}</Text>
         </View>
         <TouchableHighlight
@@ -66,12 +92,7 @@ export default function HomeScreen() {
           data={notes}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item, index }) => (
-            <Card
-              txt={item.note}
-              color={cardColors[index % 6]}
-              type={"Driving Licence"}
-              id={{ name: "Henish Patel" }}
-            />
+            <Card color={cardColors[index % 6]} type={item.type} id={item} />
           )}
           ItemSeparatorComponent={() => <View style={{ height: 20 }} />}
         />
@@ -92,6 +113,12 @@ const styles = StyleSheet.create({
     width: "100%",
     overflow: "hidden",
     height: Dimensions.get("window").height * 0.15,
+  },
+  cardIcon: {
+    resizeMode: "contain",
+    width: 50,
+    height: 50,
+    zIndex: 2,
   },
   description: {
     flex: 1,
