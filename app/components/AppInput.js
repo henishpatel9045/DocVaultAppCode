@@ -34,5 +34,6 @@ const styles = StyleSheet.create({
   docNo: {
     fontWeight: "bold",
     fontSize: 18,
+    flex: 1,
   },
 });

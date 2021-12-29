@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     borderRadius: 40,
     backgroundColor: "white",
     alignItems: "center",
-    elevation: 2,
+    elevation: 4,
     shadowColor: "white",
     justifyContent: "center",
   },

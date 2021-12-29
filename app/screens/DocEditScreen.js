@@ -1,28 +1,41 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import {
+  Dimensions,
+  KeyboardAvoidingView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
 import AppInput from "../components/AppInput";
 import IconButton from "../components/IconButton";
 import AppButton from "../components/AppButton";
+import Screen from "./Screen";
+import KeyboardAvoidingWrapper from "../components/KeyboardAvoidingWrapper";
 
-export default function DocEditScreen() {
+export default function DocEditScreen({ children }) {
   return (
-    <View style={styles.container}>
-      <View style={styles.bottomBtn}>
-        <IconButton
-          name={"smart-card"}
-          label={"Front"}
-          size={100}
-          onPress={() => console.log()}
-        />
-        <IconButton
-          name={"card-bulleted"}
-          label={"Back "}
-          size={100}
-          onPress={() => console.log()}
-        />
-      </View>
-      <AppInput label={"Name"} />
-      <AppInput label={"DocNo"} />
+    <Screen>
+      <KeyboardAvoidingWrapper style={styles.container}>
+        <View style={styles.bottomBtn}>
+          <IconButton
+            name={"smart-card"}
+            label={"Front"}
+            size={100}
+            onPress={() => console.log()}
+          />
+          <IconButton
+            name={"card-bulleted"}
+            label={"Back "}
+            size={100}
+            onPress={() => console.log()}
+          />
+        </View>
+        <AppInput label={"Name"} />
+        <AppInput label={"DocNo"} />
+        {children}
+      </KeyboardAvoidingWrapper>
       <View style={styles.footer}>
         <AppButton
           label={"Delete"}
@@ -39,7 +52,7 @@ export default function DocEditScreen() {
           radius={0}
         />
       </View>
-    </View>
+    </Screen>
   );
 }
 

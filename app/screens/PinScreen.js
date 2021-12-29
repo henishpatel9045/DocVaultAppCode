@@ -1,10 +1,11 @@
-import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, { useRef, useState } from "react";
+import { Animated, StyleSheet, Text, View } from "react-native";
 import DialComponent from "../components/DialComponent";
 import { dark } from "../configs/themes";
 
 export default function PinScreen() {
   const [total, settotal] = useState(0);
+  const fadeIn = useRef(new Animated.Value(0));
 
   let dialPad = [];
   for (let i = 1; i < 10; i++) {
@@ -19,7 +20,7 @@ export default function PinScreen() {
   }
   let pinIndicators = [];
   for (let i = 0; i < 4; i++) {
-    pinIndicators.push(<View style={styles.indicators}></View>);
+    pinIndicators.push(<View style={styles.indicators} key={i}></View>);
   }
   return (
     <View style={styles.container}>

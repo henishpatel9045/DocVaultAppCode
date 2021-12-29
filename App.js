@@ -2,9 +2,8 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 
 import { dark } from "./app/configs/themes";
-import DocSelectScreen from "./app/screens/DocSelectScreen";
-import HomeScreen from "./app/screens/HomeScreen";
-import PinScreen from "./app/screens/PinScreen";
+import DocEditScreen from "./app/screens/DocEditScreen";
+import ResultEditScreen from "./app/screens/ResultEditScreen";
 
 export default function App() {
   const urlis = [
@@ -17,7 +16,7 @@ export default function App() {
   ];
   return (
     <View style={styles.container}>
-      <PinScreen />
+      <ResultEditScreen />
     </View>
   );
 }
