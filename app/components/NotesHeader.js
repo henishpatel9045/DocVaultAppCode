@@ -44,7 +44,7 @@ export default function NotesHeader({ children }) {
         onRequestClose={() => setvisible(!visible)}
         style={{ backgroundColor: dark.primary }}
       >
-        <DocSelectScreen />
+        <DocSelectScreen handleVisible={setvisible} />
       </Modal>
       <TouchableHighlight
         style={styles.addIcon}

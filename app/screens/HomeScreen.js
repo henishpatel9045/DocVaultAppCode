@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import {
   StyleSheet,
   View,
@@ -14,18 +14,11 @@ import NotesHeader from "../components/NotesHeader";
 import { cardColors, dark } from "../configs/themes";
 import Screen from "./Screen";
 import { docImageData } from "../configs/staticData";
-import * as storageMethods from "../storage/saveToStorage";
 import EmptyScreen from "./EmptyScreen";
-import DocSelectScreen from "./EditScreens/DocSelectScreen";
+import AppContext from "../context/AppContext";
 
 export default function HomeScreen() {
-  const [docs, setDocs] = useState(false);
-  useEffect(() => {
-    storageMethods.getObj("userData").then((res) => {
-      if (res) setDocs(res);
-    });
-  }, []);
-  console.log("101", docs.docs);
+  const { userData } = useContext(AppContext);
 
   const Card = ({ id, color }) => (
     <TouchableHighlight
@@ -54,13 +47,13 @@ export default function HomeScreen() {
 
   return (
     <Screen>
-      {docs ? (
+      {userData ? (
         <NotesHeader>
           <FlatList
             showsVerticalScrollIndicator={false}
             contentContainerStyle={styles.container}
             style={{ flex: 1, width: "90%", alignSelf: "center" }}
-            data={docs.docs}
+            data={userData?.docs}
             keyExtractor={(item) => item?.docNo.toString()}
             renderItem={({ item, index }) => (
               <Card color={cardColors[index % 6]} id={item} />

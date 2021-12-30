@@ -14,13 +14,14 @@ import Screen from "../Screen";
 
 const data = docImageData;
 
-export default function DocSelectScreen() {
+export default function DocSelectScreen({ handleVisible }) {
   const navigation = useNavigation();
   const Card = ({ type, title, color, image }) => (
     <TouchableHighlight
-      onPress={() =>
-        navigation.navigate("CreateScreen", { type: type, title: title })
-      }
+      onPress={() => {
+        navigation.navigate("CreateScreen", { type: type, title: title });
+        handleVisible(false);
+      }}
       style={[styles.card, { backgroundColor: color }]}
       underlayColor={"rgba(255,255,255,0.8)"}
     >
