@@ -5,9 +5,9 @@ import AppInput from "../../components/AppInput";
 import FormContext from "../../storage/formContext";
 import DocEditScreen from "./DocEditScreen";
 
-export default function ResultEditScreen() {
+export default function ResultEditScreen({ data }) {
   return (
-    <DocEditScreen type={"result"}>
+    <DocEditScreen type={"result"} data={data}>
       <View style={{ flexDirection: "row", justifyContent: "space-evenly" }}>
         <AppInput label={"RollNo."} style={{ width: "50%" }} name={"rollNo"} />
         <AppInput label={"Year"} style={{ width: "50%" }} name={"year"} />

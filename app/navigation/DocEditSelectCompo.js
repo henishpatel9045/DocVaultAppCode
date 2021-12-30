@@ -7,8 +7,10 @@ import ResultEditScreen from "../screens/EditScreens/ResultEditScreen";
 
 export default function DocEditSelectCompo({ route }) {
   const type = route.params.type;
-  if (type === "result") return <ResultEditScreen />;
-  else if (type === "passbook") return <PassbookEditScreen />;
-  else if (type === "certificate") return <CertificateEditScreen />;
-  else return <DocEditScreen type={type} />;
+  if (type === "result") return <ResultEditScreen data={route.params} />;
+  else if (type === "passbook")
+    return <PassbookEditScreen data={route.params} />;
+  else if (type === "certificate")
+    return <CertificateEditScreen data={route.params} />;
+  else return <DocEditScreen type={type} data={route.params} />;
 }

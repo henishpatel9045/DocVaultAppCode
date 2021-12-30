@@ -1,8 +1,9 @@
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
 import {
   StyleSheet,
   Image,
-  StatusBar,
+  ScrollView,
   View,
   Modal,
   Dimensions,
@@ -14,26 +15,38 @@ import { dark } from "../../configs/themes";
 import ImageScreen from "./ImageScreen";
 
 export default function DocScreen({ data, children }) {
+  const navigation = useNavigation();
   const [visible, setVisible] = useState(false);
+  console.log(data);
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        onPress={() => setVisible(true)}
-        style={{
-          height: Dimensions.get("window").height * 0.4,
-          width: "100%",
-        }}
-      >
-        <Image source={{ uri: data.frontImage }} style={styles.img} />
-      </TouchableOpacity>
-      <DocDetailCompo label={"Name"} detail={"PATEL AMRUTBHAI KANUBHAI"} />
-      <DocDetailCompo label={"DocNo"} detail={"BIPPP6569KK"} />
-      <View style={{ flexDirection: "row" }}>
-        <DocDetailCompo label={"IssueDate"} detail={"05-09-2002"} />
-        <DocDetailCompo label={"ExpiryDate"} detail={"25-09-2005"} />
-      </View>
-      {children}
-      <AppButton label={"Share"} onPress={() => console.log()} />
+      <ScrollView style={{ flex: 1, bottom: 50 }}>
+        <TouchableOpacity
+          onPress={() => setVisible(true)}
+          style={{
+            height: Dimensions.get("window").height * 0.4,
+            width: "100%",
+          }}
+        >
+          <Image source={{ uri: data?.frontImage }} style={styles.img} />
+        </TouchableOpacity>
+        {data && data?.name != "" && (
+          <DocDetailCompo label={"Name"} detail={data.name} />
+        )}
+        {data && data?.docNo != "" && (
+          <DocDetailCompo label={"DocNo"} detail={data.docNo} />
+        )}
+        <View style={{ flexDirection: "row" }}>
+          {data && data?.issueDate && (
+            <DocDetailCompo label={"IssueDate"} detail={data.issueDate} />
+          )}
+          {data && data?.expiryDate != "" && (
+            <DocDetailCompo label={"ExpiryDate"} detail={data.expiryDate} />
+          )}
+        </View>
+        {children}
+        <AppButton label={"Share"} onPress={() => console.log()} />
+      </ScrollView>
       <View style={styles.footer}>
         <AppButton
           label={"Delete"}
@@ -45,7 +58,9 @@ export default function DocScreen({ data, children }) {
         <AppButton
           label={"Edit"}
           bgColor={"#5f90f0"}
-          onPress={() => console.log()}
+          onPress={() => {
+            navigation.navigate("CreateScreen", data);
+          }}
           width={"50%"}
           radius={0}
         />
@@ -69,6 +84,7 @@ export default function DocScreen({ data, children }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: dark.primary,
   },
   img: {
     width: "100%",

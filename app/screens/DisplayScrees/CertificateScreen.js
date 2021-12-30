@@ -4,8 +4,13 @@ import DocScreen from "./DocScreen";
 
 export default function CertificateScreen({ data }) {
   return (
-    <DocScreen>
-      <DocDetailCompo label={"Issueing Authority"} detail={data} />
+    <DocScreen data={data}>
+      {data.issuingAuthority != "" && (
+        <DocDetailCompo
+          label={"Issueing Authority"}
+          detail={data.issuingAuthority}
+        />
+      )}
     </DocScreen>
   );
 }

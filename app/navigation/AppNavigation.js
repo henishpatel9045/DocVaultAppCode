@@ -1,8 +1,8 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { docImageData } from "../configs/staticData";
 import { dark } from "../configs/themes";
-import DocEditScreen from "../screens/EditScreens/DocEditScreen";
 import HomeScreen from "../screens/HomeScreen";
 import DocEditSelectCompo from "./DocEditSelectCompo";
 import DocSelectCompo from "./DocSelectCompo";
@@ -29,12 +29,16 @@ export default function AppNavigation() {
       <Stack.Screen
         name="DisplayScreen"
         component={DocSelectCompo}
-        options={({ route }) => ({ title: route.params.title })}
+        options={({ route }) => ({
+          title: docImageData[route.params.type].title,
+        })}
       />
       <Stack.Screen
         name="CreateScreen"
         component={DocEditSelectCompo}
-        options={({ route }) => ({ title: route.params.title })}
+        options={({ route }) => ({
+          title: docImageData[route.params.type].title,
+        })}
       />
     </Stack.Navigator>
   );

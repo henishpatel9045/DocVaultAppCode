@@ -17,12 +17,12 @@ import { docImageData } from "../configs/staticData";
 import EmptyScreen from "./EmptyScreen";
 import AppContext from "../context/AppContext";
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
   const { userData } = useContext(AppContext);
 
   const Card = ({ id, color }) => (
     <TouchableHighlight
-      onPress={() => console.log()}
+      onPress={() => navigation.navigate("DisplayScreen", { ...id })}
       style={[styles.card, { backgroundColor: color }]}
       underlayColor={"rgba(255,255,255,0.8)"}
     >

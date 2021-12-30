@@ -11,7 +11,7 @@ import AppContext from "./app/context/AppContext";
 
 export default function App() {
   const { userData } = useUserData();
-  console.log(userData.docs);
+
   return (
     <View style={styles.container}>
       <AppContext.Provider value={{ userData }}>

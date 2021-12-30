@@ -12,21 +12,27 @@ import ImageShowComponent from "../../components/ImageShowComponent";
 import { dark } from "../../configs/themes";
 import ResultEditScreen from "./ResultEditScreen";
 
-export default function DocEditScreen({ children, type = "certificate" }) {
-  const initialValues = {
-    type: "",
-    name: "",
-    docNo: "",
-    issueDate: "",
-    expiryDate: "",
-    frontImage: "",
-    backImage: "",
-    ifsc: "",
-    percentage: "",
-    percentile: "",
-    year: "",
-    issuingAuthority: "",
-  };
+export default function DocEditScreen({
+  children,
+  type = "certificate",
+  data,
+}) {
+  const initialValues = data
+    ? data
+    : {
+        type: "",
+        name: "",
+        docNo: "",
+        issueDate: "",
+        expiryDate: "",
+        frontImage: "",
+        backImage: "",
+        ifsc: "",
+        percentage: "",
+        percentile: "",
+        year: "",
+        issuingAuthority: "",
+      };
 
   const handleSubmit = (values) => {
     saveMethods.getObj("userData").then((res) => {
