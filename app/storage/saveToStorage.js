@@ -22,7 +22,7 @@ const deleteObj = (key) => {
   try {
     AsyncStorage.removeItem(key);
   } catch (error) {
-    console.log(key);
+    console.log(error);
   }
 };
 

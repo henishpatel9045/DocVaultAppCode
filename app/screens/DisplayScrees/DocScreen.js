@@ -1,5 +1,5 @@
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   StyleSheet,
   Image,
@@ -7,17 +7,33 @@ import {
   View,
   Modal,
   Dimensions,
+  Alert,
   TouchableOpacity,
 } from "react-native";
 import AppButton from "../../components/AppButton";
 import DocDetailCompo from "../../components/DocDetailCompo";
 import { dark } from "../../configs/themes";
+import AppContext from "../../context/AppContext";
 import ImageScreen from "./ImageScreen";
+import * as saveMethods from "../../storage/saveToStorage";
 
 export default function DocScreen({ data, children }) {
   const navigation = useNavigation();
+  const { getData } = useContext(AppContext);
   const [visible, setVisible] = useState(false);
-  console.log(data);
+  const handleDelete = () => {
+    saveMethods.getObj("userData").then((res) => {
+      let docs = [];
+      if (res) {
+        res.docs.forEach((item, index) => {
+          if (index != data.index) docs.push(item);
+        });
+        saveMethods.saveObj("userData", { docs: [...docs] });
+        getData();
+        navigation.navigate("SelectionScreen");
+      }
+    });
+  };
   return (
     <View style={styles.container}>
       <ScrollView style={{ flex: 1, bottom: 50 }}>
@@ -36,12 +52,26 @@ export default function DocScreen({ data, children }) {
         {data && data?.docNo != "" && (
           <DocDetailCompo label={"DocNo"} detail={data.docNo} />
         )}
-        <View style={{ flexDirection: "row" }}>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-evenly",
+            width: "100%",
+          }}
+        >
           {data && data?.issueDate && (
-            <DocDetailCompo label={"IssueDate"} detail={data.issueDate} />
+            <DocDetailCompo
+              label={"IssueDate"}
+              detail={data.issueDate}
+              width={"50%"}
+            />
           )}
           {data && data?.expiryDate != "" && (
-            <DocDetailCompo label={"ExpiryDate"} detail={data.expiryDate} />
+            <DocDetailCompo
+              label={"ExpiryDate"}
+              detail={data.expiryDate}
+              width={"50%"}
+            />
           )}
         </View>
         {children}
@@ -51,7 +81,12 @@ export default function DocScreen({ data, children }) {
         <AppButton
           label={"Delete"}
           bgColor={"tomato"}
-          onPress={() => console.log()}
+          onPress={() =>
+            Alert.alert("Delete Document", "Are you sure?", [
+              { text: "No" },
+              { text: "Yes", onPress: () => handleDelete() },
+            ])
+          }
           width={"50%"}
           radius={0}
         />

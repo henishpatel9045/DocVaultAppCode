@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import { Alert, Image, StyleSheet, TouchableOpacity, View } from "react-native";
 import AppInput from "../../components/AppInput";
 import IconButton from "../../components/IconButton";
@@ -10,7 +10,8 @@ import FormContext from "../../storage/formContext";
 import AppForm from "../../components/AppForm";
 import ImageShowComponent from "../../components/ImageShowComponent";
 import { dark } from "../../configs/themes";
-import ResultEditScreen from "./ResultEditScreen";
+import AppContext from "../../context/AppContext";
+import { useNavigation } from "@react-navigation/native";
 
 export default function DocEditScreen({
   children,
@@ -24,6 +25,7 @@ export default function DocEditScreen({
         name: "",
         docNo: "",
         issueDate: "",
+        index: -1,
         expiryDate: "",
         frontImage: "",
         backImage: "",
@@ -34,9 +36,44 @@ export default function DocEditScreen({
         issuingAuthority: "",
       };
 
+  const navigation = useNavigation();
+  const { getData } = useContext(AppContext);
   const handleSubmit = (values) => {
+    if (values.frontImage && values.frontImage != "") {
+      saveMethods.getObj("userData").then((res) => {
+        let docs = [];
+        console.log(values);
+        if (res) {
+          docs = [...res?.docs];
+          if (values.index >= 0) {
+            docs[values.index] = values;
+          } else {
+            docs.push(values);
+          }
+        } else {
+          docs.push(values);
+        }
+        saveMethods.saveObj("userData", { docs: [...docs] });
+        getData();
+        navigation.navigate("SelectionScreen");
+      });
+    } else {
+      Alert.alert("Add Image", "Please add photo of front side of image.", [
+        { text: "Ok" },
+      ]);
+    }
+  };
+
+  const handleDelete = () => {
     saveMethods.getObj("userData").then((res) => {
-      saveMethods.saveObj("userData", { docs: [values] });
+      let docs = [];
+      if (res) {
+        res.docs.forEach((item, index) => {
+          if (index != data.index) docs.push(item);
+        });
+        console.log(data);
+        saveMethods.saveObj("userData", { docs: [...docs] });
+      }
     });
   };
 
@@ -88,7 +125,12 @@ export default function DocEditScreen({
         <AppButton
           label={"Delete"}
           bgColor={"tomato"}
-          onPress={() => console.log()}
+          onPress={() =>
+            Alert.alert("Delete Document", "Are you sure?", [
+              { text: "No" },
+              { text: "Yes", onPress: () => handleDelete() },
+            ])
+          }
           width={"50%"}
           radius={0}
         />

@@ -10,11 +10,11 @@ import useUserData from "./app/hooks/useUserData";
 import AppContext from "./app/context/AppContext";
 
 export default function App() {
-  const { userData } = useUserData();
+  const { userData, getData } = useUserData();
 
   return (
     <View style={styles.container}>
-      <AppContext.Provider value={{ userData }}>
+      <AppContext.Provider value={{ userData, getData }}>
         <NavigationContainer>
           <AppNavigation />
         </NavigationContainer>

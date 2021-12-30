@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import {
   StyleSheet,
   View,
@@ -18,8 +18,7 @@ import EmptyScreen from "./EmptyScreen";
 import AppContext from "../context/AppContext";
 
 export default function HomeScreen({ navigation }) {
-  const { userData } = useContext(AppContext);
-
+  const { userData, getData } = useContext(AppContext);
   const Card = ({ id, color }) => (
     <TouchableHighlight
       onPress={() => navigation.navigate("DisplayScreen", { ...id })}
@@ -45,6 +44,8 @@ export default function HomeScreen({ navigation }) {
 
   const handleShare = () => console.log();
 
+  const [refreshing, setrefreshing] = useState(false);
+
   return (
     <Screen>
       {userData ? (
@@ -56,9 +57,14 @@ export default function HomeScreen({ navigation }) {
             data={userData?.docs}
             keyExtractor={(item) => item?.docNo.toString()}
             renderItem={({ item, index }) => (
-              <Card color={cardColors[index % 6]} id={item} />
+              <Card
+                color={cardColors[index % 6]}
+                id={{ ...item, index: index }}
+              />
             )}
             ItemSeparatorComponent={() => <View style={{ height: 20 }} />}
+            refreshing={refreshing}
+            onRefresh={getData}
           />
         </NotesHeader>
       ) : (

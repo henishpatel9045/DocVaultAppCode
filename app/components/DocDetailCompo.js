@@ -10,11 +10,11 @@ import {
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { dark } from "../configs/themes";
 
-export default function DocDetailCompo({ label, detail, style }) {
+export default function DocDetailCompo({ label, detail, width, style }) {
   return (
-    <View style={style}>
+    <View style={[style, { width: width }]}>
       <Text style={styles.label}>{label}</Text>
-      <View style={styles.detail}>
+      <View style={[styles.detail]}>
         <Text style={styles.docNo}>{detail}</Text>
         <TouchableHighlight
           style={styles.rightCompo}
@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     color: "black",
     margin: 15,
+
     alignItems: "center",
     flexDirection: "row",
     justifyContent: "space-between",

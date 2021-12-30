@@ -9,5 +9,5 @@ export default () => {
     });
   };
   useEffect(() => getData(), []);
-  return { userData };
+  return { userData, getData };
 };
