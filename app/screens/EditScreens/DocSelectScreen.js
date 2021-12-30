@@ -8,9 +8,9 @@ import {
   TouchableHighlight,
   Dimensions,
 } from "react-native";
-import { docImageData } from "../configs/staticData";
-import { cardColors, dark } from "../configs/themes";
-import Screen from "./Screen";
+import { docImageData } from "../../configs/staticData";
+import { cardColors, dark } from "../../configs/themes";
+import Screen from "../Screen";
 
 const data = docImageData;
 

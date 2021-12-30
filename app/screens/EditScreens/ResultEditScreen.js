@@ -1,8 +1,8 @@
 import { useFormikContext } from "formik";
 import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import AppInput from "../components/AppInput";
-import FormContext from "../storage/formContext";
+import AppInput from "../../components/AppInput";
+import FormContext from "../../storage/formContext";
 import DocEditScreen from "./DocEditScreen";
 
 export default function ResultEditScreen() {

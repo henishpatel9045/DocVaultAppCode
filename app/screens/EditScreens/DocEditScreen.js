@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { Alert, Image, StyleSheet, TouchableOpacity, View } from "react-native";
-import AppInput from "../components/AppInput";
-import IconButton from "../components/IconButton";
-import AppButton from "../components/AppButton";
-import Screen from "./Screen";
-import KeyboardAvoidingWrapper from "../components/KeyboardAvoidingWrapper";
-import * as saveMethods from "../storage/saveToStorage";
-import FormContext from "../storage/formContext";
-import AppForm from "../components/AppForm";
-import ImageShowComponent from "../components/ImageShowComponent";
-import { dark } from "../configs/themes";
+import AppInput from "../../components/AppInput";
+import IconButton from "../../components/IconButton";
+import AppButton from "../../components/AppButton";
+import Screen from "../Screen";
+import KeyboardAvoidingWrapper from "../../components/KeyboardAvoidingWrapper";
+import * as saveMethods from "../../storage/saveToStorage";
+import FormContext from "../../storage/formContext";
+import AppForm from "../../components/AppForm";
+import ImageShowComponent from "../../components/ImageShowComponent";
+import { dark } from "../../configs/themes";
 import ResultEditScreen from "./ResultEditScreen";
 
 export default function DocEditScreen({ children, type = "certificate" }) {

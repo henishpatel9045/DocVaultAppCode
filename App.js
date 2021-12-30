@@ -3,6 +3,7 @@ import { StyleSheet, View } from "react-native";
 
 import { dark } from "./app/configs/themes";
 import AppNavigation from "./app/navigation/AppNavigation";
+import DocScreen from "./app/screens/DisplayScrees/DocScreen";
 
 export default function App() {
   return (

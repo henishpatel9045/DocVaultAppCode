@@ -7,7 +7,7 @@ import {
   View,
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import DocSelectScreen from "../screens/DocSelectScreen";
+import DocSelectScreen from "../screens/EditScreens/DocSelectScreen";
 import { dark } from "../configs/themes";
 import { NavigationContainer } from "@react-navigation/native";
 import AppNavigation from "../navigation/AppNavigation";

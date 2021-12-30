@@ -16,7 +16,7 @@ import Screen from "./Screen";
 import { docImageData } from "../configs/staticData";
 import * as storageMethods from "../storage/saveToStorage";
 import EmptyScreen from "./EmptyScreen";
-import DocSelectScreen from "./DocSelectScreen";
+import DocSelectScreen from "./EditScreens/DocSelectScreen";
 
 export default function HomeScreen() {
   const [docs, setDocs] = useState(false);

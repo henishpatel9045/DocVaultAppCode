@@ -1,12 +1,12 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import AppInput from "../../components/AppInput";
 import DocEditScreen from "./DocEditScreen";
-import AppInput from "../components/AppInput";
 
-export default function CertificateEditScreen() {
+export default function PassbookEditScreen() {
   return (
-    <DocEditScreen>
-      <AppInput label={"Issuing Authority"} />
+    <DocEditScreen type={"passbook"}>
+      <AppInput label={"IFSC"} />
     </DocEditScreen>
   );
 }
