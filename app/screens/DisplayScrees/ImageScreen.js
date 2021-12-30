@@ -11,8 +11,8 @@ import ImageViewer from "react-native-image-zoom-viewer";
 import Screen from "../Screen";
 import { dark } from "../../configs/themes";
 
-export default function ImageScreen({ label, image }) {
-  const handleBack = () => console.log();
+export default function ImageScreen({ label, image, handleVisible }) {
+  const handleBack = () => handleVisible(false);
   const handleShare = () => console.log();
   return (
     <View style={styles.container}>
@@ -37,11 +37,7 @@ export default function ImageScreen({ label, image }) {
           <MaterialCommunityIcons name={"share"} size={30} color={"#ededed"} />
         </TouchableHighlight>
       </View>
-      <ImageViewer
-        imageUrls={image}
-        backgroundColor={dark.primary}
-        saveToLocalByLongPress
-      />
+      <ImageViewer imageUrls={image} backgroundColor={dark.primary} />
     </View>
   );
 }

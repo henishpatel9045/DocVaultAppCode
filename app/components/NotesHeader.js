@@ -9,11 +9,11 @@ import {
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import DocSelectScreen from "../screens/EditScreens/DocSelectScreen";
 import { dark } from "../configs/themes";
-import { NavigationContainer } from "@react-navigation/native";
-import AppNavigation from "../navigation/AppNavigation";
+import DisclaimerScreen from "../screens/DisclaimerScreen";
 
 export default function NotesHeader({ children }) {
   const [visible, setvisible] = useState(false);
+  const [disVisible, setdisVisible] = useState(false);
   return (
     <View style={{ flex: 1 }}>
       <View style={styles.header}>
@@ -27,7 +27,7 @@ export default function NotesHeader({ children }) {
         </TouchableHighlight> */}
         <TouchableHighlight
           style={styles.icon}
-          onPress={() => console.log()}
+          onPress={() => setdisVisible(true)}
           underlayColor={"rgba(255, 255, 255, 0.3)"}
         >
           <MaterialCommunityIcons
@@ -37,6 +37,14 @@ export default function NotesHeader({ children }) {
           />
         </TouchableHighlight>
       </View>
+      <Modal
+        animationType="slide"
+        visible={disVisible}
+        onRequestClose={() => setdisVisible(false)}
+        style={{ backgroundColor: dark.primary }}
+      >
+        <DisclaimerScreen />
+      </Modal>
       <Modal
         visible={visible}
         animationType="slide"

@@ -4,11 +4,12 @@
     "slug": "DocVaultApp",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./app/assets/icon.png",
+    "icon": "./app/assets/logo.png",
     "splash": {
-      "image": "./app/assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "image": "./app/assets/logo.png",
+      "resizeMode": "cover",
+
+      "backgroundColor": "#252525"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -18,13 +19,15 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "com.henishpatel.docVault",
+      "versionCode": 1,
       "adaptiveIcon": {
-        "foregroundImage": "./app/assets/adaptive-icon.png",
+        "foregroundImage": "./app/assets/logo.png",
         "backgroundColor": "#FFFFFF"
       }
     },
     "web": {
-      "favicon": "./app/assets/favicon.png"
+      "favicon": "./app/assets/logo.png"
     }
   }
 }

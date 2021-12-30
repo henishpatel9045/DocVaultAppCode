@@ -16,6 +16,8 @@ import { dark } from "../../configs/themes";
 import AppContext from "../../context/AppContext";
 import ImageScreen from "./ImageScreen";
 import * as saveMethods from "../../storage/saveToStorage";
+import { docImageData } from "../../configs/staticData";
+import * as Sharing from "expo-sharing";
 
 export default function DocScreen({ data, children }) {
   const navigation = useNavigation();
@@ -34,6 +36,11 @@ export default function DocScreen({ data, children }) {
       }
     });
   };
+
+  const handleShare = async () => {
+    await Sharing.shareAsync(data.frontImage);
+  };
+
   return (
     <View style={styles.container}>
       <ScrollView style={{ flex: 1, bottom: 50 }}>
@@ -75,7 +82,7 @@ export default function DocScreen({ data, children }) {
           )}
         </View>
         {children}
-        <AppButton label={"Share"} onPress={() => console.log()} />
+        <AppButton label={"Share"} onPress={handleShare} />
       </ScrollView>
       <View style={styles.footer}>
         <AppButton
@@ -110,7 +117,14 @@ export default function DocScreen({ data, children }) {
         visible={visible}
         onRequestClose={() => setVisible(false)}
       >
-        <ImageScreen />
+        <ImageScreen
+          handleVisible={setVisible}
+          image={[
+            { url: data?.frontImage },
+            { url: data.backImage ? data.backImage : null },
+          ]}
+          label={docImageData[data.type].title}
+        />
       </Modal>
     </View>
   );

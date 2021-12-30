@@ -16,6 +16,7 @@ import Screen from "./Screen";
 import { docImageData } from "../configs/staticData";
 import EmptyScreen from "./EmptyScreen";
 import AppContext from "../context/AppContext";
+import * as Sharing from "expo-sharing";
 
 export default function HomeScreen({ navigation }) {
   const { userData, getData } = useContext(AppContext);
@@ -33,7 +34,7 @@ export default function HomeScreen({ navigation }) {
         </View>
         <TouchableHighlight
           style={styles.iconBtn}
-          onPress={handleShare}
+          onPress={() => handleShare(id.frontImage)}
           underlayColor={"rgba(255,255,255,0.8)"}
         >
           <MaterialCommunityIcons name="share" size={40} color={dark.primary} />
@@ -42,7 +43,9 @@ export default function HomeScreen({ navigation }) {
     </TouchableHighlight>
   );
 
-  const handleShare = () => console.log();
+  const handleShare = async (url) => {
+    await Sharing.shareAsync(url);
+  };
 
   const [refreshing, setrefreshing] = useState(false);
 
