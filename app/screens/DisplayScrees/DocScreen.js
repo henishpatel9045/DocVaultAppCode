@@ -66,19 +66,20 @@ export default function DocScreen({ data, children }) {
             width: "100%",
           }}
         >
-          {data && data?.issueDate && (
+          {data && data.issueDate && data.issueDate != "" ? (
             <DocDetailCompo
               label={"IssueDate"}
               detail={data.issueDate}
               width={"50%"}
             />
-          )}
-          {data && data?.expiryDate != "" && (
+          ) : data && data.expiryDate && data.expiryDate != "" ? (
             <DocDetailCompo
               label={"ExpiryDate"}
               detail={data.expiryDate}
               width={"50%"}
             />
+          ) : (
+            <View></View>
           )}
         </View>
         {children}

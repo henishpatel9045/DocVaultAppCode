@@ -29,13 +29,13 @@ export default function ImageScreen({ label, image, handleVisible }) {
           />
         </TouchableHighlight>
         <Text style={styles.label}>{label}</Text>
-        <TouchableHighlight
+        {/* <TouchableHighlight
           onPress={handleShare}
           style={styles.btn}
           underlayColor={"rgba(255,255,255,0.3)"}
         >
           <MaterialCommunityIcons name={"share"} size={30} color={"#ededed"} />
-        </TouchableHighlight>
+        </TouchableHighlight> */}
       </View>
       <ImageViewer imageUrls={image} backgroundColor={dark.primary} />
     </View>

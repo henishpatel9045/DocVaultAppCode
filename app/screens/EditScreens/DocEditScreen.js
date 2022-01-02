@@ -42,7 +42,7 @@ export default function DocEditScreen({
     if (values.frontImage && values.frontImage != "") {
       saveMethods.getObj("userData").then((res) => {
         let docs = [];
-        console.log(values);
+
         if (res) {
           docs = [...res?.docs];
           if (values.index >= 0) {
@@ -71,7 +71,7 @@ export default function DocEditScreen({
         res.docs.forEach((item, index) => {
           if (index != data.index) docs.push(item);
         });
-        console.log(data);
+
         saveMethods.saveObj("userData", { docs: [...docs] });
       }
     });

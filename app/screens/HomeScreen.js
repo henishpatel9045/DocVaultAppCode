@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import {
   StyleSheet,
   View,
@@ -7,8 +7,11 @@ import {
   FlatList,
   Dimensions,
   Image,
+  BackHandler,
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import * as LocalAuthentication from "expo-local-authentication";
+import LottieView from "lottie-react-native";
 
 import NotesHeader from "../components/NotesHeader";
 import { cardColors, dark } from "../configs/themes";
@@ -17,6 +20,7 @@ import { docImageData } from "../configs/staticData";
 import EmptyScreen from "./EmptyScreen";
 import AppContext from "../context/AppContext";
 import * as Sharing from "expo-sharing";
+import AppButton from "../components/AppButton";
 
 export default function HomeScreen({ navigation }) {
   const { userData, getData } = useContext(AppContext);
@@ -42,6 +46,23 @@ export default function HomeScreen({ navigation }) {
       </>
     </TouchableHighlight>
   );
+  const [authentic, setauthentic] = useState(null);
+  const auth = () => {
+    LocalAuthentication.hasHardwareAsync().then((res) => {
+      if (res) {
+        LocalAuthentication.authenticateAsync().then((resp) => {
+          if (resp.success) {
+            setauthentic(true);
+          } else if (resp.error === "user_cancel") {
+            BackHandler.exitApp();
+          }
+        });
+      }
+    });
+  };
+  useEffect(() => {
+    auth();
+  }, []);
 
   const handleShare = async (url) => {
     await Sharing.shareAsync(url);
@@ -49,9 +70,44 @@ export default function HomeScreen({ navigation }) {
 
   const [refreshing, setrefreshing] = useState(false);
 
+  if (authentic === null)
+    return (
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: dark.primary,
+          justifyContent: "center",
+        }}
+      >
+        <AppButton
+          label={"Authenticate"}
+          onPress={auth}
+          radius={15}
+          width={"80%"}
+        />
+      </View>
+    );
+
+  if (!authentic)
+    return (
+      <View>
+        <LottieView
+          source={require("../assets/animation/authError.json")}
+          autoplay
+          loop
+        />
+        <AppButton
+          label={"Authenticate"}
+          onPress={auth}
+          radius={15}
+          width={"80%"}
+        />
+      </View>
+    );
+
   return (
     <Screen>
-      {userData ? (
+      {userData && userData.docs.length ? (
         <NotesHeader>
           <FlatList
             showsVerticalScrollIndicator={false}

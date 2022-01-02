@@ -34,7 +34,7 @@ export default function AppInput({
           style={styles.docNo}
           placeholder={placeholder ? placeholder : label}
         />
-        {values[name] != "" && (
+        {values[name] && values[name] != "" ? (
           <TouchableHighlight
             style={{ padding: 5, borderRadius: 5 }}
             onPress={() => setFieldValue(name, "")}
@@ -42,6 +42,8 @@ export default function AppInput({
           >
             <MaterialCommunityIcons name="close" color={"#808080"} size={15} />
           </TouchableHighlight>
+        ) : (
+          <View></View>
         )}
       </View>
     </View>
