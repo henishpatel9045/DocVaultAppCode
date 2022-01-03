@@ -24,7 +24,7 @@ export default function DisclaimerScreen() {
         >
           <Text style={styles.line}>ompatel9045@gmail.com</Text>
         </TouchableOpacity>
-        <Text style={styles.version}>Alpha Version 1.0.3</Text>
+        <Text style={styles.version}>Alpha Version 1.0.4</Text>
       </View>
       <View style={styles.author}>
         <Text style={[styles.version]}>Find SourceCode on GitHub</Text>
