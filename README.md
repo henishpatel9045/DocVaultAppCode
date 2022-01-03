@@ -7,20 +7,20 @@ It is app for mobile devices (android/ios) tested on android devices, Which help
 ### App Security
 This app uses your device's local authentication program for validating user i.e. give permission to enter in app.
 #### Android
--Pin Lock
--FingerPrint Scan (if available)
--Retina Scan (if available)
--Face Scan (if available)
+- Pin Lock
+- FingerPrint Scan (if available)
+- Retina Scan (if available)
+- Face Scan (if available)
 #### IOS
--Pin Lock
--Face Lock
+- Pin Lock
+- Face Lock
 
 ### Storage Security
 This app uses some highly efficient libraries like random and secure store of expo to store your data in encrypted form that can only accesible by app itSelf.
 #### Libraries
--SecureStorage
--Random
--Crypto
+- SecureStorage
+- Random
+- Crypto
 
 ## How to install!!
 ### Step-1
@@ -35,4 +35,12 @@ Make appropriete changes in app folder of source-code and app.json.
 Build your app using
 ```
 expo build:andoid
+```
+OR
+```
+expo build:ios
+```
+OR 
+```
+eas build
 ```
