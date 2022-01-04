@@ -6,7 +6,11 @@ import DocScreen from "./DocScreen";
 export default function PassbookScreen({ data }) {
   return (
     <DocScreen data={data}>
-      <DocDetailCompo label={"IFSC"} detail={data.ifsc} />
+      {data && data.ifsc && data.ifsc != "" ? (
+        <DocDetailCompo label={"IFSC"} detail={data.ifsc} />
+      ) : (
+        <View></View>
+      )}
     </DocScreen>
   );
 }
